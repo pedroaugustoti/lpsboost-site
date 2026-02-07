@@ -14,7 +14,7 @@
   <div class="container">
     <div class="system-status">
       <span class="status-dot"></span>
-      <span>Sistema Online</span>
+      <span>SISTEMA ONLINE</span>
     </div>
 
     <img src="logo.png" alt="Logo LPS" class="logo" />
@@ -39,16 +39,56 @@
       </div>
     </div>
 
-    <a href="LpsTurboBoostSetup.txt" class="button">
-      <i class="fas fa-download"></i> Download Gratuito
-    </a>
+    <button id="openModal" class="button-main">
+      <i class="fas fa-download"></i> DOWNLOAD GRATUITO
+    </button>
     
     <div class="footer-info">
       <span class="version-tag">VERSÃO ESTÁVEL 2026.1</span>
-      <span class="separator">|</span>
       <span class="download-count"><i class="fas fa-users"></i> +1.2k usuários hoje</span>
     </div>
   </div>
 
+  <div id="termsModal" class="modal">
+    <div class="modal-content">
+      <h3><i class="fas fa-file-contract"></i> Termos de Uso</h3>
+      <div class="terms-text">
+        <p><strong>1. Uso:</strong> O LPS Turbo Boost é uma ferramenta de otimização. O uso é de sua responsabilidade.</p>
+        <p><strong>2. Sistema:</strong> O software altera registros para ganho de performance.</p>
+        <p><strong>3. Privacidade:</strong> Não coletamos dados pessoais.</p>
+      </div>
+      
+      <label class="checkbox-container">
+        <input type="checkbox" id="acceptTerms">
+        <span class="checkmark"></span>
+        Eu li e aceito os termos
+      </label>
+
+      <div class="modal-actions">
+        <button id="closeModal" class="btn-secondary">Voltar</button>
+        <a href="LpsTurboBoostSetup.txt" id="downloadBtn" class="btn-confirm disabled">Baixar Agora</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById("termsModal");
+    const openBtn = document.getElementById("openModal");
+    const closeBtn = document.getElementById("closeModal");
+    const checkbox = document.getElementById("acceptTerms");
+    const downloadBtn = document.getElementById("downloadBtn");
+
+    openBtn.onclick = () => modal.style.display = "flex";
+    closeBtn.onclick = () => modal.style.display = "none";
+
+    checkbox.onchange = function() {
+        if(this.checked) downloadBtn.classList.remove("disabled");
+        else downloadBtn.classList.add("disabled");
+    };
+
+    window.onclick = (event) => {
+        if (event.target == modal) modal.style.display = "none";
+    }
+  </script>
 </body>
 </html>
