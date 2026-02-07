@@ -62,8 +62,8 @@ body::after {
 }
 
 .logo {
-    width: 200px;
-    margin-bottom: 25px;
+    width: 260px;
+    margin-bottom: 15px;
     filter: drop-shadow(0 0 15px rgba(0, 123, 255, 0.4));
 }
 
