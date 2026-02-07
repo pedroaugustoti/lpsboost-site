@@ -1,68 +1,83 @@
-/* Status do Sistema */
-.system-status {
+:root {
+    --primary-blue: #007bff;
+    --light-blue: #00d4ff;
+    --dark-bg: #020617;
+    --glass-bg: rgba(255, 255, 255, 0.03);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--dark-bg);
+    color: #ffffff;
     display: flex;
-    align-items: center;
     justify-content: center;
-    gap: 8px;
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: #94a3b8;
-    margin-bottom: 10px;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
-.status-dot {
-    width: 6px;
-    height: 6px;
-    background-color: #00ff88;
-    border-radius: 50%;
-    box-shadow: 0 0 8px #00ff88;
-    animation: pulse 2s infinite;
+/* Fundo com luzes azuis */
+body::before, body::after {
+    content: "";
+    position: absolute;
+    width: 300px; height: 300px;
+    background: var(--primary-blue);
+    filter: blur(120px);
+    z-index: -1;
+    opacity: 0.2;
+}
+body::after { background: var(--light-blue); right: 0; bottom: 0; }
+
+.container {
+    background: var(--glass-bg);
+    border-radius: 24px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    max-width: 450px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
 
-/* Grid de Features */
-.features {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin-bottom: 30px;
-}
+.logo { width: 100px; margin-bottom: 5px; filter: drop-shadow(0 0 10px var(--primary-blue)); }
 
-.feature-item {
-    background: rgba(255, 255, 255, 0.03);
-    padding: 12px 5px;
+h1 { font-size: 2.2rem; margin-bottom: 10px; line-height: 1; }
+h1 span { color: var(--primary-blue); }
+
+p { color: #94a3b8; font-size: 0.9rem; margin-bottom: 25px; }
+
+.features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 25px; }
+.feature-item { background: rgba(255,255,255,0.02); padding: 10px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
+.feature-item i { color: var(--primary-blue); margin-bottom: 5px; display: block; }
+.feature-item span { font-size: 0.6rem; font-weight: 600; color: #cbd5e1; }
+
+.button-main {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--primary-blue), #0056b3);
+    border: none;
+    color: white;
     border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
 }
+.button-main:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 123, 255, 0.4); }
 
-.feature-item i {
-    display: block;
-    color: var(--primary-blue);
-    font-size: 1.1rem;
-    margin-bottom: 6px;
-}
+/* Modal */
+.modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8); z-index: 10; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
+.modal-content { background: #0f172a; padding: 30px; border-radius: 20px; max-width: 400px; width: 90%; border: 1px solid var(--primary-blue); }
+.terms-text { height: 100px; overflow-y: auto; background: rgba(0,0,0,0.3); padding: 10px; margin: 15px 0; font-size: 0.75rem; border-radius: 8px; }
 
-.feature-item span {
-    font-size: 0.65rem;
-    font-weight: 600;
-    color: #cbd5e1;
-}
+.btn-confirm { background: var(--primary-blue); color: white; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-size: 0.8rem; font-weight: bold; }
+.btn-confirm.disabled { opacity: 0.3; pointer-events: none; }
+.btn-secondary { background: transparent; border: 1px solid #334155; color: white; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-right: 10px; }
 
-/* Rodapé do Card */
-.footer-info {
-    margin-top: 20px;
-    font-size: 0.65rem;
-    color: #64748b;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    align-items: center;
-}
+.system-status { display: flex; align-items: center; justify-content: center; gap: 5px; font-size: 0.6rem; color: #94a3b8; margin-bottom: 15px; }
+.status-dot { width: 6px; height: 6px; background: #00ff88; border-radius: 50%; box-shadow: 0 0 5px #00ff88; animation: pulse 2s infinite; }
 
-.separator { opacity: 0.3; }
-
-@keyframes pulse {
-    0% { opacity: 0.5; }
-    50% { opacity: 1; }
-    100% { opacity: 0.5; }
-}
+@keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
