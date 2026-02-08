@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LPS Turbo Boost | Performance Máxima</title>
-  
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="style.css" />
@@ -13,65 +12,62 @@
 
   <div id="preloader">
       <div class="loader-content">
-          <div class="spinner"></div>
-          <p>OTIMIZANDO AMBIENTE...</p>
+          <div class="spinner-box">
+            <div class="spinner"></div>
+            <div class="spinner-core"></div>
+          </div>
+          <p>OTIMIZANDO AMBIENTE</p>
+          <div class="progress-bar"><div id="progress-fill"></div></div>
           <span id="load-percent">0%</span>
       </div>
   </div>
 
-  <div class="container">
-    <div class="system-status">
-      <span class="status-dot"></span>
-      <span>SISTEMA ONLINE</span>
+  <div id="content-wrapper" class="hidden-content">
+    <div class="container">
+      <div class="system-status">
+        <span class="status-dot"></span>
+        <span>SISTEMA ONLINE</span>
+      </div>
+
+      <img src="logo.png" alt="Logo LPS" class="logo" />
+      
+      <div class="hero-content">
+        <h1 class="glitch-effect">LPS <span>Turbo Boost</span></h1>
+        <p>A solução definitiva para eliminar o lag e maximizar os FPS do seu setup.</p>
+      </div>
+
+      <div class="features">
+        <div class="feature-item"><i class="fas fa-bolt"></i><span>FPS Boost</span></div>
+        <div class="feature-item"><i class="fas fa-microchip"></i><span>CPU Opt</span></div>
+        <div class="feature-item"><i class="fas fa-broom"></i><span>Clean RAM</span></div>
+      </div>
+
+      <button id="openModal" class="button-main">
+        <i class="fas fa-download"></i> DOWNLOAD GRATUITO
+      </button>
+      
+      <div class="footer-stats">
+        <span class="version-tag">ESTÁVEL 2026.1</span>
+        <span class="download-count"><i class="fas fa-users"></i> +1.2k ativos</span>
+      </div>
     </div>
 
-    <img src="logo.png" alt="Logo LPS" class="logo" />
-    
-    <div class="hero-content">
-      <h1 class="glitch-effect">LPS <span>Turbo Boost</span></h1>
-      <p>A solução definitiva para eliminar o lag e maximizar os FPS do seu setup com apenas um clique.</p>
-    </div>
-
-    <div class="features">
-      <div class="feature-item">
-        <i class="fas fa-bolt"></i>
-        <span>FPS Boost</span>
-      </div>
-      <div class="feature-item">
-        <i class="fas fa-microchip"></i>
-        <span>CPU Opt</span>
-      </div>
-      <div class="feature-item">
-        <i class="fas fa-broom"></i>
-        <span>Clean RAM</span>
-      </div>
-    </div>
-
-    <button id="openModal" class="button-main">
-      <i class="fas fa-download"></i> DOWNLOAD GRATUITO
-    </button>
-    
-    <div class="footer-stats">
-      <span class="version-tag">ESTÁVEL 2026.1</span>
-      <span class="download-count"><i class="fas fa-users"></i> +1.2k ativos</span>
-    </div>
+    <footer class="main-footer">
+      <p>&copy; 2026 LPS Turbo Boost. Todos os direitos reservados. Desenvolvido por Pedro Augusto.</p>
+    </footer>
   </div>
 
   <div id="termsModal" class="modal">
     <div class="modal-content">
       <h3><i class="fas fa-file-contract"></i> Termos de Uso</h3>
       <div class="terms-text">
-        <p><strong>1. Uso:</strong> O LPS Turbo Boost é uma ferramenta de otimização. O uso é de sua inteira responsabilidade.</p>
-        <p><strong>2. Sistema:</strong> O software realiza alterações técnicas para ganho de performance e estabilidade.</p>
-        <p><strong>3. Privacidade:</strong> Respeitamos sua segurança. Não coletamos dados pessoais ou telemetria.</p>
+        <p><strong>1. Uso:</strong> O uso é de sua inteira responsabilidade.</p>
+        <p><strong>2. Sistema:</strong> O software realiza alterações técnicas para performance.</p>
+        <p><strong>3. Privacidade:</strong> Não coletamos dados pessoais.</p>
       </div>
-      
       <label class="checkbox-container">
-        <input type="checkbox" id="acceptTerms">
-        <span class="checkmark"></span>
-        Eu li e aceito os termos
+        <input type="checkbox" id="acceptTerms"> Eu li e aceito os termos
       </label>
-
       <div class="modal-actions">
         <button id="closeModal" class="btn-secondary">Voltar</button>
         <a href="LpsTurboBoostSetup.txt" id="downloadBtn" class="btn-confirm disabled">Baixar Agora</a>
@@ -79,34 +75,36 @@
     </div>
   </div>
 
-  <footer class="main-footer">
-    <p>&copy; 2026 LPS Turbo Boost. Todos os direitos reservados. Desenvolvido por Pedro Augusto.</p>
-  </footer>
-
   <script>
-    // Lógica do Preloader
     window.addEventListener('load', () => {
         const preloader = document.getElementById('preloader');
+        const content = document.getElementById('content-wrapper');
         const percentText = document.getElementById('load-percent');
+        const fill = document.getElementById('progress-fill');
         let count = 0;
 
         const interval = setInterval(() => {
-            count += Math.floor(Math.random() * 15) + 1;
+            count += Math.floor(Math.random() * 12) + 1;
             if (count >= 100) {
                 count = 100;
                 percentText.innerText = count + "%";
+                fill.style.width = count + "%";
                 clearInterval(interval);
+                
                 setTimeout(() => {
                     preloader.style.opacity = '0';
-                    setTimeout(() => preloader.style.display = 'none', 500);
-                }, 400);
+                    content.classList.remove('hidden-content'); // Remove o desfoque
+                    content.classList.add('visible-content'); // Suaviza a entrada
+                    setTimeout(() => preloader.style.display = 'none', 600);
+                }, 500);
             } else {
                 percentText.innerText = count + "%";
+                fill.style.width = count + "%";
             }
-        }, 80);
+        }, 70);
     });
 
-    // Lógica do Modal e Termos
+    // Lógica Modal
     const modal = document.getElementById("termsModal");
     const openBtn = document.getElementById("openModal");
     const closeBtn = document.getElementById("closeModal");
@@ -115,15 +113,11 @@
 
     openBtn.onclick = () => modal.style.display = "flex";
     closeBtn.onclick = () => modal.style.display = "none";
-
     checkbox.onchange = function() {
         if(this.checked) downloadBtn.classList.remove("disabled");
         else downloadBtn.classList.add("disabled");
     };
-
-    window.onclick = (event) => {
-        if (event.target == modal) modal.style.display = "none";
-    };
+    window.onclick = (e) => { if (e.target == modal) modal.style.display = "none"; }
   </script>
 </body>
 </html>
