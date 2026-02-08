@@ -5,6 +5,7 @@
     --glass-bg: rgba(255, 255, 255, 0.03);
 }
 
+/* Reset básico */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
@@ -13,14 +14,14 @@ body {
     color: #ffffff;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centraliza verticalmente */
-    align-items: center;     /* Centraliza horizontalmente */
+    justify-content: center;
+    align-items: center;
     min-height: 100vh;
-    overflow-x: hidden;
+    overflow: hidden; /* Evita scrolls fantasmas durante a animação */
     position: relative;
 }
 
-/* Fundo com luzes azuis */
+/* Fundo com luzes azuis - Otimizado para não pesar no render */
 body::before, body::after {
     content: "";
     position: absolute;
@@ -29,11 +30,12 @@ body::before, body::after {
     filter: blur(120px);
     z-index: -1;
     opacity: 0.15;
+    pointer-events: none; /* Garante que não interfira nos cliques */
 }
 body::before { left: 0; top: 0; }
 body::after { background: var(--light-blue); right: 0; bottom: 0; }
 
-/* --- CARD PRINCIPAL COM FADE IN --- */
+/* --- CARD PRINCIPAL COM FADE IN OTIMIZADO --- */
 .container {
     background: var(--glass-bg);
     border-radius: 24px;
@@ -47,10 +49,24 @@ body::after { background: var(--light-blue); right: 0; bottom: 0; }
     box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 0 15px rgba(0, 123, 255, 0.05);
     z-index: 1;
     
-    /* Aplicação da Animação */
-    animation: fadeInUp 1s ease-out forwards;
+    /* Otimização de Performance */
+    will-change: transform, opacity;
+    animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* Animação usando Transformações de 3D (Mais liso) */
+@keyframes fadeInUp {
+    from { 
+        opacity: 0; 
+        transform: translate3d(0, 40px, 0); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translate3d(0, 0, 0); 
+    }
+}
+
+/* --- RESTANTE DO ESTILO --- */
 .logo { 
     width: 100px; 
     margin-bottom: 5px; 
@@ -63,9 +79,7 @@ body::after { background: var(--light-blue); right: 0; bottom: 0; }
 h1 { font-size: 2.2rem; margin-bottom: 10px; line-height: 1; transition: 0.3s; }
 h1 span { color: var(--primary-blue); text-shadow: 0 0 10px rgba(0, 123, 255, 0.5); }
 
-h1:hover {
-    text-shadow: 2px 0 #ff00c1, -2px 0 #00fff9;
-}
+h1:hover { text-shadow: 2px 0 #ff00c1, -2px 0 #00fff9; }
 
 p { color: #94a3b8; font-size: 0.9rem; margin-bottom: 25px; line-height: 1.5; }
 
@@ -144,18 +158,6 @@ p { color: #94a3b8; font-size: 0.9rem; margin-bottom: 25px; line-height: 1.5; }
     font-size: 0.7rem;
     color: rgba(148, 163, 184, 0.4);
     margin: 0;
-}
-
-/* --- KEYFRAMES --- */
-@keyframes fadeInUp {
-    from { 
-        opacity: 0; 
-        transform: translateY(30px); 
-    }
-    to { 
-        opacity: 1; 
-        transform: translateY(0); 
-    }
 }
 
 @keyframes pulse { 0%, 100% { opacity: 0.4; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
