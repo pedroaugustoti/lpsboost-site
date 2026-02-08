@@ -134,22 +134,77 @@ p { color: #94a3b8; font-size: 0.9rem; margin-bottom: 25px; line-height: 1.5; }
     gap: 4px;
 }
 
-/* Modal */
-.modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(2, 6, 23, 0.9); z-index: 10; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
-.modal-content { background: #0f172a; padding: 30px; border-radius: 20px; max-width: 400px; width: 90%; border: 1px solid var(--primary-blue); box-shadow: 0 0 30px rgba(0, 123, 255, 0.2); }
-.terms-text { height: 120px; overflow-y: auto; background: rgba(0,0,0,0.3); padding: 12px; margin: 15px 0; font-size: 0.75rem; border-radius: 8px; color: #94a3b8; line-height: 1.4; }
+/* Estilização Interna do Modal */
+.modal-content h3 {
+    color: var(--primary-blue);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
-.modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
-.btn-confirm { background: var(--primary-blue); color: white; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-size: 0.8rem; font-weight: bold; transition: 0.3s; }
-.btn-confirm.disabled { opacity: 0.3; pointer-events: none; grayscale: 1; }
-.btn-confirm:not(.disabled):hover { background: #0056b3; }
-.btn-secondary { background: transparent; border: 1px solid #334155; color: white; padding: 10px 20px; border-radius: 8px; cursor: pointer; transition: 0.3s; }
-.btn-secondary:hover { background: rgba(255,255,255,0.05); }
+.terms-item {
+    margin-bottom: 15px;
+}
 
-.checkbox-container { display: flex; align-items: center; gap: 8px; font-size: 0.75rem; color: #cbd5e1; cursor: pointer; }
+.terms-item h4 {
+    font-size: 0.85rem;
+    color: #ffffff;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
 
-.system-status { display: flex; align-items: center; justify-content: center; gap: 5px; font-size: 0.6rem; color: #94a3b8; margin-bottom: 15px; letter-spacing: 1px; }
-.status-dot { width: 6px; height: 6px; background: #00ff88; border-radius: 50%; box-shadow: 0 0 8px #00ff88; animation: pulse 2s infinite; }
+.terms-item p {
+    font-size: 0.75rem !important;
+    text-align: left;
+    margin-bottom: 0 !important;
+    line-height: 1.4;
+}
+
+/* Custom Scrollbar para o termo */
+.terms-text::-webkit-scrollbar {
+    width: 4px;
+}
+
+.terms-text::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.terms-text::-webkit-scrollbar-thumb {
+    background: var(--primary-blue);
+    border-radius: 10px;
+}
+
+/* Área de aceitação */
+.acceptance-area {
+    margin: 20px 0;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.checkbox-container {
+    font-size: 0.8rem;
+    color: #cbd5e1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+/* Botão de confirmação quando ativo */
+.btn-confirm:not(.disabled) {
+    background: var(--primary-blue);
+    box-shadow: 0 0 20px rgba(0, 123, 255, 0.4);
+    animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 10px rgba(0, 123, 255, 0.4); }
+    50% { box-shadow: 0 0 25px rgba(0, 123, 255, 0.6); }
+    100% { box-shadow: 0 0 10px rgba(0, 123, 255, 0.4); }
+}
 
 /* Rodapé Ajustado para Mobile */
 .main-footer {
