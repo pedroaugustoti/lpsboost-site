@@ -12,9 +12,9 @@ body {
     background-color: var(--dark-bg);
     color: #ffffff;
     display: flex;
-    flex-direction: column; /* Ajustado para comportar o footer no final */
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center; /* Centraliza verticalmente */
+    align-items: center;     /* Centraliza horizontalmente */
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
@@ -33,18 +33,22 @@ body::before, body::after {
 body::before { left: 0; top: 0; }
 body::after { background: var(--light-blue); right: 0; bottom: 0; }
 
+/* --- CARD PRINCIPAL COM FADE IN --- */
 .container {
     background: var(--glass-bg);
     border-radius: 24px;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(0, 123, 255, 0.2); /* Borda azulada sutil */
+    border: 1px solid rgba(0, 123, 255, 0.2);
     padding: 40px;
     max-width: 450px;
     width: 90%;
     text-align: center;
     box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 0 15px rgba(0, 123, 255, 0.05);
     z-index: 1;
+    
+    /* Aplicação da Animação */
+    animation: fadeInUp 1s ease-out forwards;
 }
 
 .logo { 
@@ -56,7 +60,6 @@ body::after { background: var(--light-blue); right: 0; bottom: 0; }
 
 .logo:hover { transform: scale(1.05); }
 
-/* Efeito Glitch no Título ao passar o mouse */
 h1 { font-size: 2.2rem; margin-bottom: 10px; line-height: 1; transition: 0.3s; }
 h1 span { color: var(--primary-blue); text-shadow: 0 0 10px rgba(0, 123, 255, 0.5); }
 
@@ -66,7 +69,6 @@ h1:hover {
 
 p { color: #94a3b8; font-size: 0.9rem; margin-bottom: 25px; line-height: 1.5; }
 
-/* Grid de Features */
 .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 25px; }
 .feature-item { 
     background: rgba(255,255,255,0.02); 
@@ -94,7 +96,6 @@ p { color: #94a3b8; font-size: 0.9rem; margin-bottom: 25px; line-height: 1.5; }
 }
 .button-main:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0, 123, 255, 0.4); }
 
-/* Rodapé interno do Card (Estatísticas) */
 .footer-stats {
     margin-top: 15px;
     display: flex;
@@ -104,7 +105,7 @@ p { color: #94a3b8; font-size: 0.9rem; margin-bottom: 25px; line-height: 1.5; }
 }
 
 .version-tag, .download-count {
-    font-size: 0.6rem; /* Reduzido conforme solicitado */
+    font-size: 0.6rem;
     letter-spacing: 1px;
     text-transform: uppercase;
     color: #94a3b8;
@@ -125,16 +126,15 @@ p { color: #94a3b8; font-size: 0.9rem; margin-bottom: 25px; line-height: 1.5; }
 .btn-secondary { background: transparent; border: 1px solid #334155; color: white; padding: 10px 20px; border-radius: 8px; cursor: pointer; transition: 0.3s; }
 .btn-secondary:hover { background: rgba(255,255,255,0.05); }
 
-/* Checkbox estilizado */
 .checkbox-container { display: flex; align-items: center; gap: 8px; font-size: 0.75rem; color: #cbd5e1; cursor: pointer; }
 
-/* Status do Sistema */
 .system-status { display: flex; align-items: center; justify-content: center; gap: 5px; font-size: 0.6rem; color: #94a3b8; margin-bottom: 15px; letter-spacing: 1px; }
 .status-dot { width: 6px; height: 6px; background: #00ff88; border-radius: 50%; box-shadow: 0 0 8px #00ff88; animation: pulse 2s infinite; }
 
-/* Rodapé Externo de Direitos Autorais */
+/* Rodapé Externo Fixado no Fundo */
 .main-footer {
-    margin-top: 30px;
+    position: absolute;
+    bottom: 0;
     padding: 20px;
     text-align: center;
     width: 100%;
@@ -144,6 +144,18 @@ p { color: #94a3b8; font-size: 0.9rem; margin-bottom: 25px; line-height: 1.5; }
     font-size: 0.7rem;
     color: rgba(148, 163, 184, 0.4);
     margin: 0;
+}
+
+/* --- KEYFRAMES --- */
+@keyframes fadeInUp {
+    from { 
+        opacity: 0; 
+        transform: translateY(30px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
 }
 
 @keyframes pulse { 0%, 100% { opacity: 0.4; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
