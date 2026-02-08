@@ -17,13 +17,15 @@
             <div class="spinner-core"></div>
           </div>
           <p>OTIMIZANDO AMBIENTE</p>
-          <div class="progress-bar"><div id="progress-fill"></div></div>
+          <div class="progress-bar-container">
+            <div id="progress-fill"></div>
+          </div>
           <span id="load-percent">0%</span>
       </div>
   </div>
 
-  <div id="content-wrapper" class="hidden-content">
-    <div class="container">
+  <div id="content-wrapper" class="hidden-site">
+    <main class="container">
       <div class="system-status">
         <span class="status-dot"></span>
         <span>SISTEMA ONLINE</span>
@@ -46,78 +48,72 @@
         <i class="fas fa-download"></i> DOWNLOAD GRATUITO
       </button>
       
-      <div class="footer-stats">
-        <span class="version-tag">ESTÁVEL 2026.1</span>
-        <span class="download-count"><i class="fas fa-users"></i> +1.2k ativos</span>
+      <div class="stats-row">
+        <span>ESTÁVEL 2026.1</span>
+        <span><i class="fas fa-users"></i> +1.2k ATIVOS</span>
       </div>
-    </div>
+    </main>
 
-    <footer class="main-footer">
+    <footer class="site-footer">
       <p>&copy; 2026 LPS Turbo Boost. Todos os direitos reservados. Desenvolvido por Pedro Augusto.</p>
     </footer>
   </div>
 
-  <div id="termsModal" class="modal">
-    <div class="modal-content">
+  <div id="termsModal" class="modal-overlay">
+    <div class="modal-card">
       <h3><i class="fas fa-file-contract"></i> Termos de Uso</h3>
-      <div class="terms-text">
-        <p><strong>1. Uso:</strong> O uso é de sua inteira responsabilidade.</p>
-        <p><strong>2. Sistema:</strong> O software realiza alterações técnicas para performance.</p>
-        <p><strong>3. Privacidade:</strong> Não coletamos dados pessoais.</p>
+      <div class="terms-box">
+        <p>O LPS Turbo Boost é uma ferramenta de otimização de registros. O uso é de sua inteira responsabilidade. Não coletamos dados pessoais.</p>
       </div>
-      <label class="checkbox-container">
-        <input type="checkbox" id="acceptTerms"> Eu li e aceito os termos
+      <label class="check-label">
+        <input type="checkbox" id="acceptTerms"> Aceito os termos de uso
       </label>
-      <div class="modal-actions">
-        <button id="closeModal" class="btn-secondary">Voltar</button>
-        <a href="LpsTurboBoostSetup.txt" id="downloadBtn" class="btn-confirm disabled">Baixar Agora</a>
+      <div class="modal-btns">
+        <button id="closeModal" class="btn-alt">Voltar</button>
+        <a href="LpsTurboBoostSetup.txt" id="downloadBtn" class="btn-go disabled">Baixar Agora</a>
       </div>
     </div>
   </div>
 
   <script>
+    // Lógica do Carregamento
     window.addEventListener('load', () => {
-        const preloader = document.getElementById('preloader');
-        const content = document.getElementById('content-wrapper');
-        const percentText = document.getElementById('load-percent');
-        const fill = document.getElementById('progress-fill');
+        const loader = document.getElementById('preloader');
+        const site = document.getElementById('content-wrapper');
+        const percent = document.getElementById('load-percent');
+        const bar = document.getElementById('progress-fill');
         let count = 0;
 
-        const interval = setInterval(() => {
-            count += Math.floor(Math.random() * 12) + 1;
+        const timer = setInterval(() => {
+            count += Math.floor(Math.random() * 10) + 1;
             if (count >= 100) {
                 count = 100;
-                percentText.innerText = count + "%";
-                fill.style.width = count + "%";
-                clearInterval(interval);
+                percent.innerText = count + "%";
+                bar.style.width = count + "%";
+                clearInterval(timer);
                 
                 setTimeout(() => {
-                    preloader.style.opacity = '0';
-                    content.classList.remove('hidden-content'); // Remove o desfoque
-                    content.classList.add('visible-content'); // Suaviza a entrada
-                    setTimeout(() => preloader.style.display = 'none', 600);
+                    loader.style.opacity = '0';
+                    site.classList.remove('hidden-site');
+                    site.classList.add('fade-in-blur');
+                    setTimeout(() => loader.style.display = 'none', 800);
                 }, 500);
             } else {
-                percentText.innerText = count + "%";
-                fill.style.width = count + "%";
+                percent.innerText = count + "%";
+                bar.style.width = count + "%";
             }
-        }, 70);
+        }, 60);
     });
 
     // Lógica Modal
     const modal = document.getElementById("termsModal");
-    const openBtn = document.getElementById("openModal");
-    const closeBtn = document.getElementById("closeModal");
-    const checkbox = document.getElementById("acceptTerms");
-    const downloadBtn = document.getElementById("downloadBtn");
-
-    openBtn.onclick = () => modal.style.display = "flex";
-    closeBtn.onclick = () => modal.style.display = "none";
-    checkbox.onchange = function() {
-        if(this.checked) downloadBtn.classList.remove("disabled");
-        else downloadBtn.classList.add("disabled");
+    const downloadLink = document.getElementById("downloadBtn");
+    document.getElementById("openModal").onclick = () => modal.style.display = "flex";
+    document.getElementById("closeModal").onclick = () => modal.style.display = "none";
+    document.getElementById("acceptTerms").onchange = function() {
+        if(this.checked) downloadLink.classList.remove("disabled");
+        else downloadLink.classList.add("disabled");
     };
-    window.onclick = (e) => { if (e.target == modal) modal.style.display = "none"; }
   </script>
 </body>
 </html>
